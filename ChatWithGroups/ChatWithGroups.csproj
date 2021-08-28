@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,11 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClientApp\chat\**" />
+    <Content Remove="ClientApp\chat\**" />
+    <EmbeddedResource Remove="ClientApp\chat\**" />
+    <None Remove="ClientApp\chat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Hubs\" />
+    <Folder Include="ClientApp\" />
   </ItemGroup>
 
 </Project>
