@@ -1,6 +1,6 @@
+import { IMessage } from './../models/message';
 import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";  // or from "@microsoft/signalr" if you are using a new library
-import { IMessage } from '../models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,9 @@ export class SignalRService {
   private hubConnection!: signalR.HubConnection;
   public messages!: IMessage[];
 
-  constructor() { }
+  constructor() {
+    this.messages = new Array<IMessage>();
+  }
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -26,5 +28,10 @@ export class SignalRService {
       this.messages.push(message);
       console.log(message);
     });
+  }
+
+  public sendMessage = (message: IMessage) => {
+    this.hubConnection.invoke('sendmessage', message)
+    .catch(err => console.error(err));
   }
 }
