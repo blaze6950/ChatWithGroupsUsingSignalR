@@ -24,6 +24,7 @@ export class ChatPageComponent implements OnInit {
 
   public onSend(){
     const message = this.form.get('message')?.value;
+    this.form.reset();
     this.signalRService.sendMessage({user: "1", content: message} as IMessage);
   }
 }

@@ -1,13 +1,20 @@
-<mat-list>
-  <mat-list-item *ngFor="let message of signalRService.messages">
-    <span>{{message.user}}: </span>
-    <span>{{message.content}}</span>
-  </mat-list-item>
-</mat-list>
-<form [formGroup]="form" class="chat-form" (ngSubmit)="onSend()">
-  <mat-form-field class="chat-form-field" appearance="fill">
-    <mat-label>Send a message</mat-label>
-    <textarea matInput formControlName="message" placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field>
-  <button mat-button color="primary" type="submit">Send</button>
-</form>
+<div class="chat-container">
+  <div class="chat-history">
+    <mat-list>
+      <div *ngFor="let message of signalRService.messages; let i = index" class="message">
+        <mat-list-item>
+          <p class="user-name">{{message.user}}: </p>
+          <p class="message-content">{{message.content}}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </div>
+  <form [formGroup]="form" class="chat-form" (ngSubmit)="onSend()" (keyup.enter)="onSend()">
+    <mat-form-field class="chat-form-field" appearance="fill">
+      <mat-label>Send a message</mat-label>
+      <textarea matInput formControlName="message" placeholder="Ex. It makes me feel..."></textarea>
+    </mat-form-field>
+    <button mat-button color="primary" type="submit">Send</button>
+  </form>
+</div>
