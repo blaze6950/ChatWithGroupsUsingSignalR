@@ -1,4 +1,9 @@
-﻿namespace ChatWithGroups.Models
+﻿using System;
+
+namespace ChatWithGroups.Models
 {
-    public record Message(string User, string Content);
+    public record Message(string User, string Content, Guid? ChatId)
+    {
+        public bool IsToChat => ChatId.HasValue;
+    };
 }
